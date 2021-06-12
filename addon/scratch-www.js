@@ -1,6 +1,8 @@
 export default async function ({ addon, global, console, msg }) {
   if (addon.auth.isLoggedIn) {
-    const r = await fetch("https://api.magnifier.potatophant.net/api/Reactions");
+    const r = await fetch(
+      "https://api.magnifier.potatophant.net/api/Reactions"
+    );
     const reactions = await r.json();
 
     while (true) {
@@ -14,7 +16,7 @@ export default async function ({ addon, global, console, msg }) {
 
       if (comment.querySelector("form")) continue; // comment input
 
-      let commentId = comment.id.replace(/\D/g,''); // extract commentId from id property of comment
+      let commentId = comment.id.replace(/\D/g, ""); // extract commentId from id property of comment
 
       let bottomRow = comment.querySelector(".comment-bottom-row"); // selecton bottom row of comment where controls are
 
@@ -26,7 +28,9 @@ export default async function ({ addon, global, console, msg }) {
 
       let showReactionMenuButton = document.createElement("span"); // create button that shows reaction menu
 
-      showReactionMenuButton.classList.add("magnifier-show-reaction-menu-button");
+      showReactionMenuButton.classList.add(
+        "magnifier-show-reaction-menu-button"
+      );
 
       showReactionMenuButton.innerText = "😀";
 
@@ -55,12 +59,19 @@ export default async function ({ addon, global, console, msg }) {
 
       function setReactionMenuVisibility(visible) {
         if (visible) {
-          showReactionMenuButton.parentElement.querySelector("#magnifier-reaction-menu").classList.remove("hidden");
-          showReactionMenuButton.parentElement.querySelector("#magnifier-reaction-menu").classList.add("visible");
-        }
-        else {
-          showReactionMenuButton.parentElement.querySelector("#magnifier-reaction-menu").classList.remove("visible");
-          showReactionMenuButton.parentElement.querySelector("#magnifier-reaction-menu").classList.add("hidden");
+          showReactionMenuButton.parentElement
+            .querySelector("#magnifier-reaction-menu")
+            .classList.remove("hidden");
+          showReactionMenuButton.parentElement
+            .querySelector("#magnifier-reaction-menu")
+            .classList.add("visible");
+        } else {
+          showReactionMenuButton.parentElement
+            .querySelector("#magnifier-reaction-menu")
+            .classList.remove("visible");
+          showReactionMenuButton.parentElement
+            .querySelector("#magnifier-reaction-menu")
+            .classList.add("hidden");
         }
 
         reactionMenuVisible = visible;
@@ -91,23 +102,31 @@ export default async function ({ addon, global, console, msg }) {
         reactionList.innerHTML = "";
         reactionMenu.innerHTML = "";
 
-        reactions.forEach(j => {
+        reactions.forEach((j) => {
           let reactionListButton = document.createElement("span");
           let reactionMenuButton = document.createElement("span");
 
           reactionListButton.classList.add("magnifier-reaction-button");
           reactionMenuButton.classList.add("magnifier-reaction-button");
 
-          if (commentReactions.filter(reaction => reaction.reaction === j.name && reaction.user === addon.auth.username).length > 0) {
+          if (
+            commentReactions.filter(
+              (reaction) =>
+                reaction.reaction === j.name &&
+                reaction.user === addon.auth.username
+            ).length > 0
+          ) {
             reactionListButton.classList.add("selected");
             reactionMenuButton.classList.add("selected");
           }
 
-          let reactionCount = commentReactions.filter(reaction => reaction.reaction === j.name).length;
-    
+          let reactionCount = commentReactions.filter(
+            (reaction) => reaction.reaction === j.name
+          ).length;
+
           reactionListButton.innerText = `${j.emoji} ${reactionCount}`;
           reactionMenuButton.innerText = j.emoji;
-    
+
           function react(e) {
             e.preventDefault();
             let magnifier = window.open(
@@ -116,7 +135,7 @@ export default async function ({ addon, global, console, msg }) {
               "width=300,height=300"
             );
             let timer = setInterval(checkClosed, 500);
-    
+
             function checkClosed() {
               if (magnifier.closed) {
                 clearInterval(timer);
@@ -131,7 +150,7 @@ export default async function ({ addon, global, console, msg }) {
           reactionMenuButton.addEventListener("click", (e) => {
             react(e);
           });
-    
+
           if (reactionCount > 0) {
             reactionList.appendChild(reactionListButton);
           }
@@ -143,7 +162,7 @@ export default async function ({ addon, global, console, msg }) {
         tooltipArrow.classList.add("tooltip-arrow");
 
         reactionMenu.appendChild(tooltipArrow);
-        
+
         reactionMenu.style.marginLeft = `-${reactionMenu.offsetWidth / 2}px`;
       }
 
@@ -151,7 +170,9 @@ export default async function ({ addon, global, console, msg }) {
     }
 
     async function fetchReactions(commentId) {
-      const response = await fetch(`https://api.magnifier.potatophant.net/api/Comments/${commentId}/reactions`);
+      const response = await fetch(
+        `https://api.magnifier.potatophant.net/api/Comments/${commentId}/reactions`
+      );
       return response.json();
     }
   }
