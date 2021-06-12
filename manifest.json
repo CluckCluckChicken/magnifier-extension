@@ -16,12 +16,8 @@
   "content_scripts": [
     {
       "run_at": "document_start",
-      "matches": [
-        "https://scratch.mit.edu/*"
-      ],
-      "js": [
-        "run-inject.js"
-      ]
+      "matches": ["https://scratch.mit.edu/*"],
+      "js": ["run-inject.js"]
     }
   ],
   "web_accessible_resources": [
