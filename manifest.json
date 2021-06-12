@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "Magnifier",
+  "description": "Scratch comment reactions, and more!",
+  "default_locale": "en",
+  "author": "potatophant",
+  "version": "1.0.0",
+  "homepage_url": "https://potatophant.net",
+  "icons": {
+    "32": "images/favicon.png",
+    "128": "images/bigIcon.png"
+  },
+  "browser_action": {
+    "default_icon": "images/favicon.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://scratch.mit.edu/*"
+      ],
+      "js": [
+        "run-inject.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "addon/*",
+    "images/*",
+    "inject/*",
+    "libraries/*",
+    "l10n/*"
+  ]
+}
