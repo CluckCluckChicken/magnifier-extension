@@ -17,7 +17,10 @@
     },
     {
       "url": "scratchr2.js",
-      "matches": ["https://scratch.mit.edu/users/*", "https://scratch.mit.edu/studios/*/comments"],
+      "matches": [
+        "https://scratch.mit.edu/users/*",
+        "https://scratch.mit.edu/studios/*/comments"
+      ],
       "settingMatch": {
         "id": "reactions",
         "value": true
@@ -27,7 +30,11 @@
   "userstyles": [
     {
       "url": "reactions.css",
-      "matches": ["https://scratch.mit.edu/projects/*", "https://scratch.mit.edu/users/*", "https://scratch.mit.edu/studios/*/comments"],
+      "matches": [
+        "https://scratch.mit.edu/projects/*",
+        "https://scratch.mit.edu/users/*",
+        "https://scratch.mit.edu/studios/*/comments"
+      ],
       "settingMatch": {
         "id": "reactions",
         "value": true
